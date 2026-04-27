@@ -7,8 +7,17 @@ from fastapi.responses import JSONResponse
 from insightface.app import FaceAnalysis
 import mediapipe as mp
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app_api = FastAPI(title="ML Face Service")
 
+app_api.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 MODEL_DIR = "/app/models"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
